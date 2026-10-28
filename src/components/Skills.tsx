@@ -1,8 +1,5 @@
-import { FiCode, FiDatabase, FiTool, FiPlus } from "react-icons/fi";
 import { learning, skills } from "@/data/portfolio";
 import SectionHeading from "./SectionHeading";
-
-const icons = [FiCode, FiDatabase, FiTool, FiPlus];
 
 export default function Skills() {
   return (
@@ -10,36 +7,35 @@ export default function Skills() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <SectionHeading index="02" label="Skills" title="Tools I build with" />
 
-        <div className="grid gap-5 sm:grid-cols-2">
-          {skills.map((group, i) => {
-            const Icon = icons[i % icons.length];
-            return (
-              <div
-                key={group.title}
-                className="rounded-2xl border border-line bg-surface p-6 transition-colors hover:border-accent/40"
-              >
-                <div className="flex items-center gap-3">
-                  <span className="grid size-9 place-items-center rounded-lg bg-accent/10 text-accent">
-                    <Icon size={17} />
-                  </span>
-                  <h3 className="font-semibold">{group.title}</h3>
-                </div>
-                <ul className="mt-5 flex flex-wrap gap-2">
-                  {group.items.map((item) => (
-                    <li
-                      key={item}
-                      className="rounded-full border border-line bg-surface-2 px-3 py-1.5 text-sm text-ink/90"
+        <div className="space-y-12">
+          {skills.map((group) => (
+            <div key={group.title}>
+              <h3 className="mb-5 flex items-center gap-3 font-semibold">
+                {group.title}
+                <span className="h-px flex-1 bg-line" />
+                <span className="font-mono text-xs font-normal text-muted">{group.items.length}</span>
+              </h3>
+              <ul className="grid grid-cols-3 gap-3 sm:grid-cols-4 lg:grid-cols-8">
+                {group.items.map(({ name, icon: Icon, color }) => (
+                  <li
+                    key={name}
+                    className="group flex flex-col items-center gap-3 rounded-2xl border border-line bg-surface px-2 py-5 text-center transition hover:-translate-y-1 hover:border-accent/40"
+                  >
+                    <span
+                      className="grid size-12 place-items-center rounded-xl transition-transform group-hover:scale-110"
+                      style={{ backgroundColor: `${color}1a`, color }}
                     >
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            );
-          })}
+                      <Icon size={26} />
+                    </span>
+                    <span className="text-xs leading-tight text-ink/90 sm:text-sm">{name}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
 
-        <div className="mt-5 flex flex-col gap-3 rounded-2xl border border-dashed border-line p-6 sm:flex-row sm:items-center">
+        <div className="mt-12 flex flex-col gap-3 rounded-2xl border border-dashed border-line p-6 sm:flex-row sm:items-center">
           <p className="shrink-0 font-mono text-sm text-accent">Currently learning →</p>
           <ul className="flex flex-wrap gap-2">
             {learning.map((item) => (
