@@ -2,6 +2,7 @@ import Image from "next/image";
 import { FiDownload, FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
 import { profile } from "@/data/portfolio";
+import ResumeViewer from "./ResumeViewer";
 import TiltCard from "./motion/TiltCard";
 
 const socials = [
@@ -59,13 +60,16 @@ export default function ProfileCard() {
         ))}
       </ul>
 
-      <a
-        href={profile.resume}
-        download
-        className="mt-6 flex w-full items-center justify-center gap-2 rounded-full bg-neutral-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-accent"
-      >
-        <FiDownload /> Download Resume
-      </a>
+      <div className="mt-6 grid gap-2">
+        <ResumeViewer className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-full border-2 border-neutral-900 px-5 py-2.5 text-sm font-semibold text-neutral-900 transition hover:border-accent hover:text-accent" />
+        <a
+          href={profile.resume}
+          download
+          className="flex w-full items-center justify-center gap-2 rounded-full bg-neutral-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-accent"
+        >
+          <FiDownload /> Download Resume
+        </a>
+      </div>
     </TiltCard>
   );
 }
