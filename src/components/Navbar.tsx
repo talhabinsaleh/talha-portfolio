@@ -1,53 +1,49 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { FiMenu, FiX } from "react-icons/fi";
+import { useState } from "react";
 import Link from "next/link";
-import { navLinks } from "@/data/portfolio";
+import { FiDownload, FiMenu, FiX } from "react-icons/fi";
+import { navLinks, profile } from "@/data/portfolio";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-colors ${
-        scrolled || open ? "border-b border-line bg-bg/85 backdrop-blur-md" : "border-b border-transparent"
-      }`}
-    >
-      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-        <Link href="/" className="font-mono text-sm font-semibold tracking-tight">
-          <span className="text-accent">~/</span>talha
+    <header className="fixed inset-x-0 top-4 z-50 px-4">
+      <nav className="mx-auto flex max-w-fit items-center gap-1 rounded-full border border-line bg-surface/80 p-1.5 shadow-2xl shadow-black/40 backdrop-blur-xl">
+        <Link
+          href="/"
+          className="grid size-9 place-items-center rounded-full bg-accent font-display text-sm font-bold text-accent-ink"
+          aria-label="Home"
+        >
+          T
         </Link>
 
-        <ul className="hidden items-center gap-8 lg:flex">
+        <ul className="hidden items-center lg:flex">
           {navLinks.map((link) => (
             <li key={link.href}>
-              <Link href={link.href} className="text-sm text-muted transition-colors hover:text-ink">
+              <Link
+                href={link.href}
+                className="rounded-full px-4 py-2 text-sm text-muted transition-colors hover:bg-surface-2 hover:text-ink"
+              >
                 {link.label}
               </Link>
             </li>
           ))}
         </ul>
 
-        <Link
-          href="/#contact"
-          className="hidden rounded-full bg-accent px-4 py-2 text-sm font-medium text-accent-ink transition hover:brightness-110 lg:inline-block"
+        <a
+          href={profile.resume}
+          download
+          className="ml-1 inline-flex items-center gap-2 rounded-full bg-ink px-4 py-2 text-sm font-medium text-bg transition hover:bg-lime"
         >
-          Hire me
-        </Link>
+          <FiDownload size={14} /> Resume
+        </a>
 
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
-          className="grid size-10 place-items-center rounded-lg border border-line lg:hidden"
+          className="grid size-9 place-items-center rounded-full text-muted hover:text-ink lg:hidden"
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
         >
@@ -56,13 +52,13 @@ export default function Navbar() {
       </nav>
 
       {open && (
-        <ul className="space-y-1 border-t border-line px-4 py-4 lg:hidden">
+        <ul className="mx-auto mt-2 max-w-xs space-y-1 rounded-3xl border border-line bg-surface/95 p-2 shadow-2xl shadow-black/50 backdrop-blur-xl lg:hidden">
           {navLinks.map((link) => (
             <li key={link.href}>
               <Link
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="block rounded-lg px-3 py-2 text-muted hover:bg-surface hover:text-ink"
+                className="block rounded-2xl px-4 py-3 text-muted hover:bg-surface-2 hover:text-ink"
               >
                 {link.label}
               </Link>
