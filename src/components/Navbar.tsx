@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
+import Link from "next/link";
 import { navLinks } from "@/data/portfolio";
 
 export default function Navbar() {
@@ -22,31 +23,31 @@ export default function Navbar() {
       }`}
     >
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-        <a href="#top" className="font-mono text-sm font-semibold tracking-tight">
+        <Link href="/" className="font-mono text-sm font-semibold tracking-tight">
           <span className="text-accent">~/</span>talha
-        </a>
+        </Link>
 
-        <ul className="hidden items-center gap-8 md:flex">
+        <ul className="hidden items-center gap-8 lg:flex">
           {navLinks.map((link) => (
             <li key={link.href}>
-              <a href={link.href} className="text-sm text-muted transition-colors hover:text-ink">
+              <Link href={link.href} className="text-sm text-muted transition-colors hover:text-ink">
                 {link.label}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
 
-        <a
-          href="#contact"
-          className="hidden rounded-full bg-accent px-4 py-2 text-sm font-medium text-accent-ink transition hover:brightness-110 md:inline-block"
+        <Link
+          href="/#contact"
+          className="hidden rounded-full bg-accent px-4 py-2 text-sm font-medium text-accent-ink transition hover:brightness-110 lg:inline-block"
         >
           Hire me
-        </a>
+        </Link>
 
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
-          className="grid size-10 place-items-center rounded-lg border border-line md:hidden"
+          className="grid size-10 place-items-center rounded-lg border border-line lg:hidden"
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
         >
@@ -55,16 +56,16 @@ export default function Navbar() {
       </nav>
 
       {open && (
-        <ul className="space-y-1 border-t border-line px-4 py-4 md:hidden">
+        <ul className="space-y-1 border-t border-line px-4 py-4 lg:hidden">
           {navLinks.map((link) => (
             <li key={link.href}>
-              <a
+              <Link
                 href={link.href}
                 onClick={() => setOpen(false)}
                 className="block rounded-lg px-3 py-2 text-muted hover:bg-surface hover:text-ink"
               >
                 {link.label}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
