@@ -1,24 +1,23 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-bg: #0e0e0e;
-  --color-surface: #161616;
-  --color-surface-2: #1d1d1d;
-  --color-line: #262626;
-  --color-ink: #f4f4f2;
-  --color-muted: #9a9a96;
-  --color-faint: #3a3a3a;
+  --color-bg: #0a0a0a;
+  --color-surface: #121212;
+  --color-surface-2: #1a1a1a;
+  --color-line: #222222;
+  --color-ink: #f5f5f3;
+  --color-muted: #8f8f8a;
+  --color-faint: #343434;
   --color-accent: #ff6a2b;
   --color-lime: #c6f432;
   --color-paper: #fafaf7;
-  --color-accent-ink: #0e0e0e;
+  --color-accent-ink: #0a0a0a;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-display: var(--font-poppins);
 }
 
 html {
-  scroll-behavior: smooth;
   scroll-padding-top: 6rem;
 }
 
@@ -34,13 +33,17 @@ body {
 
 ::selection {
   background: var(--color-accent);
-  color: #0e0e0e;
+  color: #0a0a0a;
 }
 
 .glow {
-  background:
-    radial-gradient(60rem 30rem at 85% -10%, rgb(255 106 43 / 0.16), transparent 60%),
-    radial-gradient(40rem 24rem at -10% 30%, rgb(198 244 50 / 0.05), transparent 60%);
+  background: radial-gradient(70rem 32rem at 70% -12%, rgb(255 106 43 / 0.13), transparent 60%);
+}
+
+/* Faint dotted grid used inside some tiles. */
+.dots {
+  background-image: radial-gradient(rgb(255 255 255 / 0.07) 1px, transparent 1px);
+  background-size: 14px 14px;
 }
 
 @keyframes marquee {
@@ -50,21 +53,11 @@ body {
 }
 
 .animate-marquee {
-  animation: marquee 40s linear infinite;
+  animation: marquee 35s linear infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
   .animate-marquee {
     animation: none;
-  }
-}
-
-@media (pointer: fine) {
-  .has-custom-cursor,
-  .has-custom-cursor * {
-    cursor: none !important;
   }
 }

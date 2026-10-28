@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Poppins } from "next/font/google";
 import "./globals.css";
-import { Grain, MotionProvider, ScrollProgress, Spotlight } from "@/components/motion/Effects";
-import { Cursor } from "@/components/motion/Interactive";
+import { MotionProvider, ScrollProgress } from "@/components/motion/Effects";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -47,9 +46,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col font-sans">
         <MotionProvider>
           <ScrollProgress />
-          <Spotlight />
-          <Grain />
-          <Cursor />
           {children}
         </MotionProvider>
       </body>

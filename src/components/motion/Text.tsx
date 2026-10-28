@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useInView, useReducedMotion, useScroll, useTransform, type MotionValue } from "motion/react";
+import { motion, useInView, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { useIntroDone } from "./Effects";
 
@@ -101,8 +101,8 @@ export function KineticHeading({ top, bottom, index }: { top: string; bottom: st
   const ref = useRef<HTMLHeadingElement>(null);
   const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "center 0.55"] });
-  const topX = useTransform(scrollYProgress, [0, 1], ["-9%", "0%"]);
-  const bottomX = useTransform(scrollYProgress, [0, 1], ["9%", "0%"]);
+  const topX = useTransform(scrollYProgress, [0, 1], ["6%", "0%"]);
+  const bottomX = useTransform(scrollYProgress, [0, 1], ["14%", "0%"]);
   const fill = useTransform(scrollYProgress, [0.35, 1], ["0% 100%", "100% 100%"]);
 
   return (
@@ -124,31 +124,6 @@ export function KineticHeading({ top, bottom, index }: { top: string; bottom: st
         {bottom}
       </motion.span>
     </h2>
-  );
-}
-
-function Word({ children, progress, range }: { children: string; progress: MotionValue<number>; range: [number, number] }) {
-  const opacity = useTransform(progress, range, [0.18, 1]);
-  return (
-    <motion.span style={{ opacity }} className="transition-none">
-      {children}{" "}
-    </motion.span>
-  );
-}
-
-// Paragraph whose words light up one by one as it scrolls through the screen.
-export function ScrollWords({ text, className }: { text: string; className?: string }) {
-  const ref = useRef<HTMLParagraphElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.92", "end 0.6"] });
-  const words = text.split(" ");
-  return (
-    <p ref={ref} className={className}>
-      {words.map((w, i) => (
-        <Word key={i} progress={scrollYProgress} range={[i / words.length, (i + 1) / words.length]}>
-          {w}
-        </Word>
-      ))}
-    </p>
   );
 }
 

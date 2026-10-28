@@ -44,7 +44,7 @@ function Preloader({ onDone }: { onDone: () => void }) {
     try {
       seen = sessionStorage.getItem("intro-seen") === "1";
     } catch {}
-    const duration = seen ? 0 : 1.5;
+    const duration = seen ? 0 : 0.9;
     const controls = animate(count, 100, { duration, ease: [0.65, 0, 0.35, 1] });
     const timer = setTimeout(
       () => {
@@ -54,7 +54,7 @@ function Preloader({ onDone }: { onDone: () => void }) {
           sessionStorage.setItem("intro-seen", "1");
         } catch {}
       },
-      seen ? 0 : 1750,
+      seen ? 0 : 1050,
     );
     return () => {
       controls.stop();
@@ -69,7 +69,7 @@ function Preloader({ onDone }: { onDone: () => void }) {
           className="fixed inset-0 z-[200] flex flex-col justify-between bg-accent p-5 text-neutral-950 sm:p-10"
           initial={{ clipPath: "inset(0% 0% 0% 0%)" }}
           exit={{ clipPath: "inset(0% 0% 100% 0%)" }}
-          transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
+          transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1] }}
         >
           <div className="flex justify-between font-display text-sm font-semibold uppercase sm:text-base">
             <span>Talha Bin Saleh</span>
@@ -102,45 +102,6 @@ export function ScrollProgress() {
     <motion.div
       className="fixed inset-x-0 top-0 z-[60] h-1 origin-left bg-gradient-to-r from-accent to-lime"
       style={{ scaleX }}
-    />
-  );
-}
-
-// Soft orange glow that follows the mouse on desktop.
-export function Spotlight() {
-  const x = useMotionValue(-400);
-  const y = useMotionValue(-400);
-  const sx = useSpring(x, { stiffness: 150, damping: 25 });
-  const sy = useSpring(y, { stiffness: 150, damping: 25 });
-
-  useEffect(() => {
-    const move = (e: PointerEvent) => {
-      x.set(e.clientX - 300);
-      y.set(e.clientY - 300);
-    };
-    window.addEventListener("pointermove", move);
-    return () => window.removeEventListener("pointermove", move);
-  }, [x, y]);
-
-  return (
-    <motion.div
-      aria-hidden
-      className="pointer-events-none fixed top-0 left-0 z-0 hidden size-[600px] rounded-full bg-[radial-gradient(circle,rgb(255_106_43/0.10),transparent_60%)] lg:block"
-      style={{ x: sx, y: sy }}
-    />
-  );
-}
-
-// Fine film grain over the whole page.
-export function Grain() {
-  return (
-    <div
-      aria-hidden
-      className="pointer-events-none fixed inset-0 z-[70] opacity-[0.045] mix-blend-overlay"
-      style={{
-        backgroundImage:
-          "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
-      }}
     />
   );
 }
