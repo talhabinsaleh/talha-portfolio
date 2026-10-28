@@ -1,24 +1,34 @@
-import { FiArrowUpRight, FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
+import { FiArrowUpRight, FiGithub, FiLinkedin, FiMail, FiPhone } from "react-icons/fi";
+import { FaWhatsapp } from "react-icons/fa";
 import { profile } from "@/data/portfolio";
 import SectionHeading from "./SectionHeading";
 
+const digits = (n: string) => n.replace(/[^\d]/g, "");
+
 const channels = [
   { label: "Email", value: profile.email, href: `mailto:${profile.email}`, icon: FiMail },
-  { label: "GitHub", value: "github.com/talhabinsaleh", href: profile.github, icon: FiGithub },
+  profile.phone && { label: "Phone", value: profile.phone, href: `tel:+${digits(profile.phone)}`, icon: FiPhone },
+  profile.whatsapp && {
+    label: "WhatsApp",
+    value: profile.whatsapp,
+    href: `https://wa.me/${digits(profile.whatsapp)}`,
+    icon: FaWhatsapp,
+  },
   { label: "LinkedIn", value: "in/talha-bin-saleh", href: profile.linkedin, icon: FiLinkedin },
-];
+  { label: "GitHub", value: "github.com/talhabinsaleh", href: profile.github, icon: FiGithub },
+].filter((c) => !!c);
 
 export default function Contact() {
   return (
     <section id="contact" className="py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <SectionHeading index="05" label="Contact" title="Let's build something together" />
+        <SectionHeading index="06" label="Contact" title="Let's build something together" />
 
         <div className="grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-start">
           <div>
             <p className="max-w-md text-lg leading-relaxed text-muted">
-              I&apos;m open to junior full-stack or frontend roles, internships and freelance projects. The
-              fastest way to reach me is email — I usually reply within a day.
+              I&apos;m open to junior full-stack or frontend roles, internships and freelance projects. Reach me
+              directly by email, phone or WhatsApp — I usually reply within a day.
             </p>
             <a
               href={`mailto:${profile.email}`}
