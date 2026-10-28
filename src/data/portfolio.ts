@@ -18,7 +18,7 @@ export const stats = [
 
 export const about = [
   "I'm Talha, a full-stack developer from Dhaka studying B.Sc. in Computer Science at Daffodil Institute of IT. I like turning designs into clean, responsive interfaces and wiring them up to real data.",
-  "My recent work covers the full stack: typed React components, Next.js App Router pages, sign-in with email, Google and GitHub, and MongoDB-backed data — each one deployed on Vercel with every push to main.",
+  "My recent work covers the full stack: typed React components, Next.js App Router pages, sign-in with email, Google and GitHub through BetterAuth, and MongoDB-backed data — each one deployed on Vercel with every push to main.",
   "Before writing apps I spent years building WordPress sites and doing SEO at Yaaply, so I care about speed, accessibility and pages that search engines can actually read.",
 ];
 
@@ -30,8 +30,8 @@ export const skills: SkillGroup[] = [
     items: ["HTML5", "CSS3", "JavaScript", "TypeScript", "React", "Next.js", "Tailwind CSS", "DaisyUI"],
   },
   {
-    title: "Backend & Data",
-    items: ["Node.js", "MongoDB", "BetterAuth", "OAuth (Google, GitHub)", "REST APIs", "JSON"],
+    title: "Backend & Auth",
+    items: ["Next.js server side", "BetterAuth", "OAuth (Google, GitHub)", "MongoDB Atlas", "Protected routes", "JSON"],
   },
   {
     title: "Tools & Workflow",
@@ -42,6 +42,8 @@ export const skills: SkillGroup[] = [
     items: ["WordPress", "WooCommerce", "Technical SEO", "C", "Python", "Gemini API"],
   },
 ];
+
+export const learning = ["Node.js", "Express", "REST APIs", "MongoDB queries", "JWT"];
 
 export type Project = {
   title: string;

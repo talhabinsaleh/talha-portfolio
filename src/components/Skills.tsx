@@ -1,5 +1,5 @@
 import { FiCode, FiDatabase, FiTool, FiPlus } from "react-icons/fi";
-import { skills } from "@/data/portfolio";
+import { learning, skills } from "@/data/portfolio";
 import SectionHeading from "./SectionHeading";
 
 const icons = [FiCode, FiDatabase, FiTool, FiPlus];
@@ -37,6 +37,17 @@ export default function Skills() {
               </div>
             );
           })}
+        </div>
+
+        <div className="mt-5 flex flex-col gap-3 rounded-2xl border border-dashed border-line p-6 sm:flex-row sm:items-center">
+          <p className="shrink-0 font-mono text-sm text-accent">Currently learning →</p>
+          <ul className="flex flex-wrap gap-2">
+            {learning.map((item) => (
+              <li key={item} className="rounded-full border border-line px-3 py-1.5 text-sm text-muted">
+                {item}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>
