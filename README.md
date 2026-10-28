@@ -8,14 +8,17 @@ My personal portfolio as a full-stack developer, built with **Next.js (App Route
 
 ## Sections
 
-- **Navbar** — responsive, links to every section
-- **Hero** — designation, photo, resume download button and social links
+- **Navbar** — floating, responsive, links to every section plus a resume button
+- **Profile card** — photo, designation, social links and **Download Resume**
+- **Hero** — designation headline, intro, stats and highlight cards
 - **About me** — programming journey, work I enjoy and hobbies
-- **Skills** — graphical icon grid grouped into Frontend, Backend & Auth, Tools
-- **Education** and **Experience** timelines
-- **Projects** — cards with image and a View Details button; each project has its own page with tech stack, description, live link, GitHub link, challenges and future plans
+- **Skills** — graphical icon tiles grouped into Frontend, Backend & Auth, Tools
+- **Education** and **Experience**
+- **Projects** — cards with image and a **View Details** button; each project page has tech stack, description, live link, GitHub link, challenges and future plans
 - **Contact** — email, phone, WhatsApp, LinkedIn and GitHub
 - **Footer**
+
+**Resume:** [`public/Talha-Bin-Saleh-Resume.pdf`](public/Talha-Bin-Saleh-Resume.pdf) (source in `resume/resume.html`)
 
 ## Tech stack
 
@@ -23,6 +26,7 @@ My personal portfolio as a full-stack developer, built with **Next.js (App Route
 - TypeScript
 - Tailwind CSS v4
 - react-icons
+- Poppins + Geist fonts
 - Deployed on Vercel
 
 ## Run locally
