@@ -31,6 +31,7 @@ function StackCard({ p, i, progress }: { p: Project; i: number; progress: Motion
               alt={`${p.title} screenshot`}
               fill
               sizes="(min-width: 768px) 700px, 100vw"
+              loading="eager"
               className="object-cover object-left-top transition-transform duration-700 group-hover/tile:scale-110"
             />
           </span>

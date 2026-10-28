@@ -2,7 +2,6 @@
 
 import { motion } from "motion/react";
 import type { PointerEvent, ReactNode } from "react";
-import { useIntroDone } from "./Effects";
 
 type Props = {
   children: ReactNode;
@@ -23,28 +22,39 @@ function trackPointer(e: PointerEvent<HTMLDivElement>) {
 }
 
 // Bento tile: expands open from its centre, and a soft glow follows the pointer on hover.
+// Hero tiles (`intro`) use the CSS .tile-in animation so they show on first paint; the rest open
+// just before they scroll into view, so they are already there when you reach them.
 export default function Tile({ children, className = "", delay = 0, intro = false }: Props) {
-  const ready = useIntroDone();
-  const trigger = intro
-    ? { animate: ready ? open : undefined }
-    : { whileInView: open, viewport: { once: true, margin: "-40px" } };
-
   // Only apply the default dark background/border when the tile doesn't bring its own colour.
   const bg = /(^|\s)bg-/.test(className) ? "" : "bg-surface";
   const border = /(^|\s)border-(accent|lime)/.test(className) ? "" : "border-line";
+  const classes = `group/tile relative overflow-hidden rounded-[28px] border ${border} ${bg} ${className}`;
+  const glow = (
+    <span
+      aria-hidden
+      className="pointer-events-none absolute inset-0 z-10 opacity-0 transition-opacity duration-300 group-hover/tile:opacity-100 bg-[radial-gradient(420px_circle_at_var(--x,50%)_var(--y,50%),rgb(255_106_43/0.09),transparent_60%)]"
+    />
+  );
+
+  if (intro) {
+    return (
+      <div className={`tile-in ${classes}`} style={{ animationDelay: `${delay}s` }} onPointerMove={trackPointer}>
+        {glow}
+        {children}
+      </div>
+    );
+  }
 
   return (
     <motion.div
-      className={`group/tile relative overflow-hidden rounded-[28px] border ${border} ${bg} ${className}`}
+      className={classes}
       initial={closed}
-      {...trigger}
-      transition={{ duration: 0.75, delay, ease }}
+      whileInView={open}
+      viewport={{ once: true, margin: "0px 0px 220px 0px" }}
+      transition={{ duration: 0.5, delay: delay / 2, ease }}
       onPointerMove={trackPointer}
     >
-      <span
-        aria-hidden
-        className="pointer-events-none absolute inset-0 z-10 opacity-0 transition-opacity duration-300 group-hover/tile:opacity-100 bg-[radial-gradient(420px_circle_at_var(--x,50%)_var(--y,50%),rgb(255_106_43/0.09),transparent_60%)]"
-      />
+      {glow}
       {children}
     </motion.div>
   );

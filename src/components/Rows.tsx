@@ -14,8 +14,8 @@ export default function Rows({ items }: { items: TimelineItem[] }) {
           className="group relative grid gap-3 border-b border-line px-2 py-8 sm:grid-cols-[180px_1fr_auto] sm:gap-8 sm:px-4"
           initial={{ clipPath: "inset(0% 100% 0% 0%)" }}
           whileInView={{ clipPath: "inset(0% 0% 0% 0%)" }}
-          viewport={{ once: true, margin: "-40px" }}
-          transition={{ duration: 0.8, delay: i * 0.08, ease: [0.76, 0, 0.24, 1] }}
+          viewport={{ once: true, margin: "0px 0px 150px 0px" }}
+          transition={{ duration: 0.6, delay: i * 0.05, ease: [0.76, 0, 0.24, 1] }}
         >
           <span
             aria-hidden

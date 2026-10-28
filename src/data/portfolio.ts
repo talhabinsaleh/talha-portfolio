@@ -53,7 +53,8 @@ export const about = {
     "Wanting to build things WordPress couldn't, I went back to the fundamentals — HTML, CSS and JavaScript — and then joined Programming Hero's web development course. Since then I've moved from vanilla JS to React, TypeScript and Next.js, and shipped apps with real sign-in and MongoDB data.",
   ],
   work: [
-    "I enjoy frontend work most: taking a Figma design and turning it into a responsive, accessible interface that matches it pixel for pixel. I also like the moment a page connects to real data — auth flows, protected routes and forms that just work.",
+    "I enjoy writing the code behind a smooth web app: reusable React components in TypeScript, fast Next.js pages, and responsive layouts with Tailwind CSS that match the Figma design pixel for pixel.",
+    "I also like the logic underneath — sign-in with BetterAuth and OAuth, protected routes, and reading and writing data in MongoDB. Clean, typed, well-structured code that the next developer can understand is what I aim for.",
   ],
   hobbies: [
     { name: "Sports", text: "Playing and following sports keeps me active and taught me teamwork long before code did." },

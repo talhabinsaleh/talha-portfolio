@@ -56,8 +56,48 @@ body {
   animation: marquee 35s linear infinite;
 }
 
+/* Hero entrance animations are pure CSS so they start with the first paint, before any JavaScript.
+   Each element's resting style is its final state; the keyframes only describe where it comes from. */
+@keyframes tile-in {
+  from {
+    clip-path: inset(10% 10% 10% 10% round 28px);
+    opacity: 0;
+  }
+}
+
+.tile-in {
+  animation: tile-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes flip-in {
+  from {
+    opacity: 0;
+    transform: translateY(40%) rotateX(-95deg);
+    filter: blur(8px);
+  }
+}
+
+.flip-char {
+  display: inline-block;
+  transform-origin: bottom;
+  animation: flip-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes roll {
+  from {
+    transform: translateY(0);
+  }
+}
+
+.roll {
+  animation: roll 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .animate-marquee {
+  .animate-marquee,
+  .tile-in,
+  .flip-char,
+  .roll {
     animation: none;
   }
 }

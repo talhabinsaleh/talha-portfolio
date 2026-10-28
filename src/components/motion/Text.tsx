@@ -1,8 +1,7 @@
 "use client";
 
-import { motion, useInView, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { useEffect, useRef, useState } from "react";
-import { useIntroDone } from "./Effects";
 
 const GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ<>/{}[]=+*#%&$";
 
@@ -42,18 +41,16 @@ export function ScrambleText({ text, className }: { text: string; className?: st
 export function ScrambleWords({ words, className }: { words: string[]; className?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
   const [index, setIndex] = useState(0);
-  const ready = useIntroDone();
 
   useEffect(() => {
-    if (!ready) return;
     const id = setInterval(() => setIndex((i) => (i + 1) % words.length), 2600);
     return () => clearInterval(id);
-  }, [ready, words.length]);
+  }, [words.length]);
 
   useEffect(() => {
-    if (!ref.current || !ready) return;
+    if (!ref.current || index === 0) return;
     return scramble(ref.current, words[index], 700);
-  }, [index, ready, words]);
+  }, [index, words]);
 
   return (
     <span ref={ref} className={className}>
@@ -62,11 +59,8 @@ export function ScrambleWords({ words, className }: { words: string[]; className
   );
 }
 
-const ease = [0.16, 1, 0.3, 1] as const;
-
-// Hero headline: every letter flips up in 3D out of a blur, right after the intro.
+// Headline: every letter flips up in 3D out of a blur. Pure CSS (.flip-char), so it plays on first paint.
 export function FlipChars({ lines }: { lines: { text: string; className?: string }[] }) {
-  const ready = useIntroDone();
   let n = 0;
   return (
     <h1
@@ -75,20 +69,11 @@ export function FlipChars({ lines }: { lines: { text: string; className?: string
     >
       {lines.map((line) => (
         <span key={line.text} className={`block whitespace-nowrap ${line.className ?? ""}`} aria-hidden>
-          {[...line.text].map((ch, i) => {
-            const delay = 0.05 + n++ * 0.035;
-            return (
-              <motion.span
-                key={i}
-                className="inline-block origin-bottom"
-                initial={{ opacity: 0, rotateX: -95, y: "40%", filter: "blur(10px)" }}
-                animate={ready ? { opacity: 1, rotateX: 0, y: "0%", filter: "blur(0px)" } : undefined}
-                transition={{ duration: 0.9, delay, ease }}
-              >
-                {ch}
-              </motion.span>
-            );
-          })}
+          {[...line.text].map((ch, i) => (
+            <span key={i} className="flip-char" style={{ animationDelay: `${0.03 + n++ * 0.03}s` }}>
+              {ch}
+            </span>
+          ))}
         </span>
       ))}
     </h1>
@@ -129,35 +114,27 @@ export function KineticHeading({ top, bottom, index }: { top: string; bottom: st
 
 const DIGITS = [..."01234567890123456789"];
 
-// Number whose digits spin like a slot machine before landing, e.g. "10+".
+// Number whose digits spin like a slot machine before landing, e.g. "10+". Pure CSS (.roll).
 export function RollingNumber({ value }: { value: string }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true });
-  const ready = useIntroDone();
-  const go = inView && ready;
-  const [landed, setLanded] = useState(false);
-
-  if (landed) return <span>{value}</span>;
-
   return (
-    <span ref={ref} className="inline-flex">
+    <span className="inline-flex tabular-nums">
       <span className="sr-only">{value}</span>
       {[...value].map((ch, i) =>
         /\d/.test(ch) ? (
           <span key={i} aria-hidden className="relative inline-block h-[1em] overflow-hidden leading-none">
-            <motion.span
-              className="flex flex-col"
-              initial={{ y: "0%" }}
-              animate={go ? { y: `-${((10 + Number(ch)) / DIGITS.length) * 100}%` } : undefined}
-              transition={{ duration: 1.8 + i * 0.3, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              onAnimationComplete={() => i === value.search(/\d(?!.*\d)/) && setLanded(true)}
+            <span
+              className="roll flex flex-col"
+              style={{
+                transform: `translateY(-${((10 + Number(ch)) / DIGITS.length) * 100}%)`,
+                animationDuration: `${1.2 + i * 0.25}s`,
+              }}
             >
               {DIGITS.map((d, k) => (
                 <span key={k} className="block h-[1em] leading-none">
                   {d}
                 </span>
               ))}
-            </motion.span>
+            </span>
           </span>
         ) : (
           <span key={i} aria-hidden className="leading-none">
