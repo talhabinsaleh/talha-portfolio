@@ -1,12 +1,12 @@
 import { education } from "@/data/portfolio";
 import BigHeading from "./BigHeading";
-import Timeline from "./Timeline";
+import Rows from "./Rows";
 
 export default function Education() {
   return (
     <section id="education">
       <BigHeading top="Education" bottom="& Learning" index="03" />
-      <Timeline items={education} />
+      <Rows items={education} />
     </section>
   );
 }
