@@ -1,11 +1,11 @@
 import { learning, skills } from "@/data/portfolio";
 import BigHeading from "./BigHeading";
-import { Reveal, Stagger, StaggerItem } from "./motion/Reveal";
+import { SpotlightGroup, spotlightItem } from "./motion/Interactive";
 
 export default function Skills() {
   return (
     <section id="skills">
-      <BigHeading top="Skills &" bottom="Tools" />
+      <BigHeading top="Skills &" bottom="Tools" index="02" />
 
       <div className="mt-10 space-y-10">
         {skills.map((group) => (
@@ -15,27 +15,27 @@ export default function Skills() {
               <span className="h-px flex-1 bg-line" />
               <span className="font-mono text-xs font-normal text-muted">{String(group.items.length).padStart(2, "0")}</span>
             </h3>
-            <Stagger className="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-4">
+            <SpotlightGroup className="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-4">
               {group.items.map(({ name, icon: Icon, color }) => (
-                <StaggerItem
+                <li
                   key={name}
-                  className="group flex items-center gap-3 rounded-2xl border border-line bg-surface p-3 transition-[translate,border-color] duration-300 hover:-translate-y-0.5 hover:border-accent/40"
+                  className={`group flex items-center gap-3 rounded-2xl border border-line bg-surface p-3 transition-colors hover:border-accent/40 ${spotlightItem}`}
                 >
                   <span
-                    className="grid size-11 shrink-0 place-items-center rounded-xl transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-12"
+                    className="relative grid size-11 shrink-0 place-items-center rounded-xl transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-12"
                     style={{ backgroundColor: `${color}1f`, color }}
                   >
                     <Icon size={22} />
                   </span>
-                  <span className="text-sm leading-tight font-medium">{name}</span>
-                </StaggerItem>
+                  <span className="relative text-sm leading-tight font-medium">{name}</span>
+                </li>
               ))}
-            </Stagger>
+            </SpotlightGroup>
           </div>
         ))}
       </div>
 
-      <Reveal className="mt-10 flex flex-col gap-3 rounded-3xl border border-dashed border-lime/40 bg-lime/5 p-6 sm:flex-row sm:items-center">
+      <div className="mt-10 flex flex-col gap-3 rounded-3xl border border-dashed border-lime/40 bg-lime/5 p-6 sm:flex-row sm:items-center">
         <p className="shrink-0 font-display text-sm font-semibold text-lime uppercase">Currently learning →</p>
         <ul className="flex flex-wrap gap-2">
           {learning.map((item) => (
@@ -44,7 +44,7 @@ export default function Skills() {
             </li>
           ))}
         </ul>
-      </Reveal>
+      </div>
     </section>
   );
 }

@@ -5,7 +5,7 @@ import Timeline from "./Timeline";
 export default function Experience() {
   return (
     <section id="experience">
-      <BigHeading top="Work" bottom="Experience" />
+      <BigHeading top="Work" bottom="Experience" index="04" />
       <Timeline items={experience} />
     </section>
   );
