@@ -2,6 +2,7 @@ import Image from "next/image";
 import { FiDownload, FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
 import { profile } from "@/data/portfolio";
+import TiltCard from "./motion/TiltCard";
 
 const socials = [
   { href: profile.github, label: "GitHub", icon: FiGithub },
@@ -12,9 +13,9 @@ const socials = [
 
 export default function ProfileCard() {
   return (
-    <div className="relative mx-auto w-full max-w-sm overflow-hidden rounded-[2rem] bg-paper p-6 text-center text-neutral-900 shadow-2xl shadow-black/50">
+    <TiltCard className="relative mx-auto w-full max-w-sm overflow-hidden rounded-[2rem] bg-paper p-6 text-center text-neutral-900 shadow-2xl shadow-black/50">
       <svg
-        className="pointer-events-none absolute -top-10 -left-10 size-56 text-accent"
+        className="pointer-events-none absolute -top-10 -left-10 size-56 animate-[spin_30s_linear_infinite] text-accent"
         viewBox="0 0 200 200"
         fill="none"
         aria-hidden
@@ -29,7 +30,7 @@ export default function ProfileCard() {
           fill
           priority
           sizes="(min-width: 1024px) 260px, 340px"
-          className="object-cover object-top"
+          className="object-cover object-top transition-transform duration-700 hover:scale-105"
         />
         <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-black/60 px-3 py-1 text-xs font-medium text-white backdrop-blur">
           <span className="size-1.5 animate-pulse rounded-full bg-lime" /> Open to work
@@ -65,6 +66,6 @@ export default function ProfileCard() {
       >
         <FiDownload /> Download Resume
       </a>
-    </div>
+    </TiltCard>
   );
 }
