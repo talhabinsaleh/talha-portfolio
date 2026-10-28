@@ -32,7 +32,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
   return (
     <>
       <Navbar />
-      <main className="flex-1 pt-28 pb-24">
+      <main className="glow flex-1 pt-32 pb-8">
         <div className="mx-auto max-w-5xl px-4 sm:px-6">
           <Link href="/#projects" className="inline-flex items-center gap-2 text-sm text-muted hover:text-ink">
             <FiArrowLeft /> All projects
@@ -42,13 +42,13 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
             <p className="font-mono text-sm text-accent">
               {p.date} · {p.tagline}
             </p>
-            <h1 className="mt-3 text-4xl font-semibold tracking-tight sm:text-5xl">{p.title}</h1>
+            <h1 className="mt-3 font-display text-5xl font-extrabold tracking-tight uppercase sm:text-7xl">{p.title}</h1>
             <div className="mt-8 flex flex-wrap gap-3">
               <a
                 href={p.live}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-medium text-accent-ink transition hover:brightness-110"
+                className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 font-semibold text-accent-ink transition hover:bg-lime"
               >
                 Live project <FiArrowUpRight />
               </a>
@@ -63,7 +63,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
             </div>
           </header>
 
-          <div className="mt-12 rounded-3xl border border-line bg-surface-2 p-3 sm:p-5">
+          <div className="mt-12 rounded-3xl bg-accent p-3 sm:p-5">
             <div className="relative aspect-[1200/630] overflow-hidden rounded-2xl border border-line">
               <Image src={p.image} alt={`${p.title} screenshot`} fill priority sizes="(min-width: 1024px) 984px, 100vw" className="object-cover" />
             </div>
@@ -72,7 +72,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
           <div className="mt-16 grid gap-12 lg:grid-cols-[1.6fr_1fr]">
             <div className="space-y-14">
               <section>
-                <h2 className="text-2xl font-semibold">Overview</h2>
+                <h2 className="font-display text-2xl font-bold uppercase">Overview</h2>
                 <p className="mt-4 text-lg leading-relaxed text-muted">{p.description}</p>
                 <ul className="mt-6 space-y-3">
                   {p.features.map((f) => (
@@ -85,7 +85,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
               </section>
 
               <section>
-                <h2 className="flex items-center gap-3 text-2xl font-semibold">
+                <h2 className="flex items-center gap-3 font-display text-2xl font-bold uppercase">
                   <FiAlertTriangle className="text-amber-300" /> Challenges I faced
                 </h2>
                 <ol className="mt-6 space-y-4">
@@ -99,7 +99,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
               </section>
 
               <section>
-                <h2 className="flex items-center gap-3 text-2xl font-semibold">
+                <h2 className="flex items-center gap-3 font-display text-2xl font-bold uppercase">
                   <FiTrendingUp className="text-accent" /> Improvements & future plans
                 </h2>
                 <ul className="mt-6 grid gap-3 sm:grid-cols-2">
@@ -140,7 +140,7 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
           >
             <span>
               <span className="block font-mono text-xs text-muted">Next project</span>
-              <span className="mt-1 block text-xl font-semibold sm:text-2xl">{next.title}</span>
+              <span className="mt-1 block font-display text-2xl font-bold uppercase sm:text-4xl">{next.title}</span>
             </span>
             <FiArrowUpRight className="size-6 text-muted transition group-hover:text-accent" />
           </Link>
