@@ -3,7 +3,8 @@ import { FiDownload, FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
 import { profile } from "@/data/portfolio";
 import ResumeViewer from "./ResumeViewer";
-import TiltCard from "./motion/TiltCard";
+import { Magnetic } from "./motion/Interactive";
+import TiltCard, { IntroZoom } from "./motion/TiltCard";
 
 const socials = [
   { href: profile.github, label: "GitHub", icon: FiGithub },
@@ -25,14 +26,16 @@ export default function ProfileCard() {
       </svg>
 
       <div className="relative mx-auto aspect-[4/5] w-full overflow-hidden rounded-3xl bg-accent">
-        <Image
-          src={profile.photo}
-          alt={`Photo of ${profile.name}`}
-          fill
-          priority
-          sizes="(min-width: 1024px) 260px, 340px"
-          className="object-cover object-top transition-transform duration-700 hover:scale-105"
-        />
+        <IntroZoom className="absolute inset-0">
+          <Image
+            src={profile.photo}
+            alt={`Photo of ${profile.name}`}
+            fill
+            priority
+            sizes="(min-width: 1024px) 260px, 340px"
+            className="object-cover object-top"
+          />
+        </IntroZoom>
         <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-black/60 px-3 py-1 text-xs font-medium text-white backdrop-blur">
           <span className="size-1.5 animate-pulse rounded-full bg-lime" /> Open to work
         </span>
@@ -47,28 +50,34 @@ export default function ProfileCard() {
       <ul className="mt-5 flex justify-center gap-2">
         {socials.map(({ href, label, icon: Icon }) => (
           <li key={label}>
-            <a
-              href={href}
-              target={href.startsWith("http") ? "_blank" : undefined}
-              rel="noreferrer"
-              aria-label={label}
-              className="grid size-10 place-items-center rounded-full border border-neutral-200 text-neutral-600 transition hover:border-accent hover:bg-accent hover:text-white"
-            >
-              <Icon size={17} />
-            </a>
+            <Magnetic strength={0.5}>
+              <a
+                href={href}
+                target={href.startsWith("http") ? "_blank" : undefined}
+                rel="noreferrer"
+                aria-label={label}
+                className="grid size-10 place-items-center rounded-full border border-neutral-200 text-neutral-600 transition-colors hover:border-accent hover:bg-accent hover:text-white"
+              >
+                <Icon size={17} />
+              </a>
+            </Magnetic>
           </li>
         ))}
       </ul>
 
       <div className="mt-6 grid gap-2">
-        <ResumeViewer className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-full border-2 border-neutral-900 px-5 py-2.5 text-sm font-semibold text-neutral-900 transition hover:border-accent hover:text-accent" />
-        <a
-          href={profile.resume}
-          download
-          className="flex w-full items-center justify-center gap-2 rounded-full bg-neutral-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-accent"
-        >
-          <FiDownload /> Download Resume
-        </a>
+        <Magnetic strength={0.15}>
+          <ResumeViewer className="flex w-full items-center justify-center gap-2 rounded-full border-2 border-neutral-900 px-5 py-2.5 text-sm font-semibold text-neutral-900 transition-colors hover:border-accent hover:text-accent" />
+        </Magnetic>
+        <Magnetic strength={0.15}>
+          <a
+            href={profile.resume}
+            download
+            className="flex w-full items-center justify-center gap-2 rounded-full bg-neutral-900 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent"
+          >
+            <FiDownload /> Download Resume
+          </a>
+        </Magnetic>
       </div>
     </TiltCard>
   );
