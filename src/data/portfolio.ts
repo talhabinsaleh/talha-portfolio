@@ -30,21 +30,19 @@ export const profile = {
   role: "Full-Stack Developer",
   location: "Dhaka, Bangladesh",
   email: "talhabinsalehasif32@gmail.com",
-  // Fill these in to show them in the Contact section.
-  phone: "",
-  whatsapp: "",
+  phone: "+880 1700-547094",
+  whatsapp: "+880 1700-547094",
   github: "https://github.com/talhabinsaleh",
   linkedin: "https://www.linkedin.com/in/talha-bin-saleh/",
   seoPortfolio: "https://talha-bin-saleh.netlify.app/",
-  // Drop the files in /public and set the paths, e.g. "/talha.jpg" and "/resume.pdf".
-  photo: "",
-  resume: "",
+  photo: "/talha.jpg",
+  resume: "/Talha-Bin-Saleh-Resume.pdf",
   intro:
     "I build modern, fast web apps with React, Next.js and TypeScript — from pixel-matched interfaces to authentication and databases. A CSE student who ships real projects to production.",
 };
 
 export const stats = [
-  { value: "4", label: "Live web apps" },
+  { value: "4+", label: "Live web apps" },
   { value: "3+", label: "Years building for the web" },
   { value: "10+", label: "WordPress sites shipped" },
 ];
@@ -57,7 +55,11 @@ export const about = {
   work: [
     "I enjoy frontend work most: taking a Figma design and turning it into a responsive, accessible interface that matches it pixel for pixel. I also like the moment a page connects to real data — auth flows, protected routes and forms that just work.",
   ],
-  hobbies: [] as string[],
+  hobbies: [
+    { name: "Sports", text: "Playing and following sports keeps me active and taught me teamwork long before code did." },
+    { name: "Travel", text: "Exploring new places and people — always planning the next trip." },
+    { name: "Gaming", text: "Games are how I unwind, and figuring out how they work is half the fun." },
+  ],
 };
 
 export type Skill = { name: string; icon: IconType; color: string };
@@ -263,16 +265,22 @@ export const experience: TimelineItem[] = [
     period: "2023 — Present",
     title: "SEO Specialist & Web Developer",
     place: "Yaaply Limited",
-    text: "Build WordPress and WooCommerce sites and grow them with technical SEO, performance audits and link building.",
+    text: "Build WordPress and WooCommerce sites and grow them with technical SEO, performance audits and link building. Also upgrade and maintain an internal AI blog-publishing tool (Python, Flask, WordPress REST API) — added batch publishing of up to 8 articles, featured-image and infographic uploads, automatic internal linking and quality checks, and team access over the office network.",
   },
 ];
 
 export const education: TimelineItem[] = [
   {
-    period: "In progress",
+    period: "2023 — 2026",
     title: "B.Sc. in Computer Science & Engineering",
-    place: "Daffodil Institute of IT",
-    text: "Data structures, algorithms, computer networks and programming in C and Python.",
+    place: "Daffodil Institute of IT, Dhaka",
+    text: "Data structures, algorithms, computer networks, databases and programming in C and Python.",
+  },
+  {
+    period: "Alim (HSC equivalent)",
+    title: "Higher Secondary — GPA 5.00 out of 5.00",
+    place: "Pabna Islamia Madrasah, Pabna",
+    text: "Completed higher secondary education under the Bangladesh Madrasah Education Board with a perfect GPA.",
   },
   {
     period: "2026",
