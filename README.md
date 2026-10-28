@@ -8,12 +8,14 @@ My personal portfolio as a full-stack developer, built with **Next.js (App Route
 
 ## Sections
 
-- **Hero** — intro, social links and quick stats
-- **About** — background and quick facts
-- **Skills** — frontend, backend, tools and more
-- **Projects** — Bazar Dor, FitLog, DevStack and Gemini Quiz Wizard, each with screenshot, stack, live and code links
-- **Journey** — experience and education timeline
-- **Contact** — email, GitHub and LinkedIn
+- **Navbar** — responsive, links to every section
+- **Hero** — designation, photo, resume download button and social links
+- **About me** — programming journey, work I enjoy and hobbies
+- **Skills** — graphical icon grid grouped into Frontend, Backend & Auth, Tools
+- **Education** and **Experience** timelines
+- **Projects** — cards with image and a View Details button; each project has its own page with tech stack, description, live link, GitHub link, challenges and future plans
+- **Contact** — email, phone, WhatsApp, LinkedIn and GitHub
+- **Footer**
 
 ## Tech stack
 
