@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import Marquee from "@/components/Marquee";
 import About from "@/components/About";
 import Skills from "@/components/Skills";
 import Education from "@/components/Education";
@@ -15,6 +16,7 @@ export default function Home() {
       <div className="glow">
         <main className="mx-auto max-w-7xl space-y-28 px-3 pt-24 sm:px-6 lg:space-y-36 lg:pt-28">
           <Hero />
+          <Marquee />
           <About />
           <Skills />
           <Education />

@@ -38,7 +38,7 @@ export default function Tile({ children, className = "", delay = 0, intro = fals
 
   if (intro) {
     return (
-      <div className={`tile-in ${classes}`} style={{ animationDelay: `${delay}s` }} onPointerMove={trackPointer}>
+      <div className={`tile-in ${classes}`} style={{ animationDelay: `calc(var(--intro) + ${delay}s)` }} onPointerMove={trackPointer}>
         {glow}
         {children}
       </div>

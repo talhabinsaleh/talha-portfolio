@@ -70,7 +70,7 @@ export function FlipChars({ lines }: { lines: { text: string; className?: string
       {lines.map((line) => (
         <span key={line.text} className={`block whitespace-nowrap ${line.className ?? ""}`} aria-hidden>
           {[...line.text].map((ch, i) => (
-            <span key={i} className="flip-char" style={{ animationDelay: `${0.03 + n++ * 0.03}s` }}>
+            <span key={i} className="flip-char" style={{ animationDelay: `calc(var(--intro) + ${0.03 + n++ * 0.03}s)` }}>
               {ch}
             </span>
           ))}

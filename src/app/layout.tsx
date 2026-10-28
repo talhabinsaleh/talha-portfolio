@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Poppins } from "next/font/google";
 import "./globals.css";
+import Loader from "@/components/Loader";
 import { MotionProvider, ScrollProgress } from "@/components/motion/Effects";
+import { Cursor } from "@/components/motion/Interactive";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -41,11 +43,23 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} h-full antialiased`}
     >
+      <head>
+        {/* Runs before first paint: skip the intro curtain if it already played this session. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{if(sessionStorage.getItem('intro-seen'))document.documentElement.classList.add('intro-seen');else sessionStorage.setItem('intro-seen','1')}catch(e){}",
+          }}
+        />
+      </head>
       <body className="min-h-full flex flex-col font-sans">
+        <Loader />
         <MotionProvider>
           <ScrollProgress />
+          <Cursor />
           {children}
         </MotionProvider>
       </body>
