@@ -3,6 +3,7 @@ import Link from "next/link";
 import { FiArrowRight, FiArrowUpRight } from "react-icons/fi";
 import { projects } from "@/data/portfolio";
 import BigHeading from "./BigHeading";
+import { Reveal } from "./motion/Reveal";
 
 export default function Projects() {
   return (
@@ -11,9 +12,9 @@ export default function Projects() {
 
       <div className="mt-10 grid gap-5 sm:grid-cols-2">
         {projects.map((p, i) => (
+          <Reveal key={p.slug} delay={(i % 2) * 0.12} className="flex">
           <article
-            key={p.slug}
-            className="group flex flex-col overflow-hidden rounded-3xl border border-line bg-surface transition hover:-translate-y-1 hover:border-accent/50"
+            className="group flex w-full flex-col overflow-hidden rounded-3xl border border-line bg-surface transition hover:-translate-y-1 hover:border-accent/50"
           >
             <Link href={`/projects/${p.slug}`} className={`block p-3 ${i % 2 ? "bg-lime/90" : "bg-accent/90"}`}>
               <span className="relative block aspect-[1200/630] overflow-hidden rounded-2xl">
@@ -61,6 +62,7 @@ export default function Projects() {
               </div>
             </div>
           </article>
+          </Reveal>
         ))}
       </div>
     </section>

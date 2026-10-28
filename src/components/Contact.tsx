@@ -2,6 +2,7 @@ import { FiArrowUpRight, FiGithub, FiLinkedin, FiMail, FiPhone } from "react-ico
 import { FaWhatsapp } from "react-icons/fa";
 import { profile } from "@/data/portfolio";
 import BigHeading from "./BigHeading";
+import { Reveal, Stagger, StaggerItem } from "./motion/Reveal";
 
 const digits = (n: string) => n.replace(/\D/g, "");
 
@@ -23,6 +24,7 @@ export default function Contact() {
         reply within a day.
       </p>
 
+      <Reveal>
       <a
         href={`mailto:${profile.email}`}
         className="group mt-8 flex items-center justify-between gap-4 rounded-3xl bg-accent p-6 text-neutral-950 transition hover:bg-lime sm:p-8"
@@ -33,10 +35,11 @@ export default function Contact() {
         </span>
         <FiArrowUpRight className="size-8 shrink-0 transition group-hover:rotate-45" />
       </a>
+      </Reveal>
 
-      <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+      <Stagger className="mt-4 grid gap-3 sm:grid-cols-2">
         {channels.slice(1).map(({ label, value, href, icon: Icon }) => (
-          <li key={label}>
+          <StaggerItem key={label}>
             <a
               href={href}
               target={href.startsWith("http") ? "_blank" : undefined}
@@ -52,9 +55,9 @@ export default function Contact() {
               </span>
               <FiArrowUpRight className="shrink-0 text-muted transition group-hover:text-accent" />
             </a>
-          </li>
+          </StaggerItem>
         ))}
-      </ul>
+      </Stagger>
     </section>
   );
 }
