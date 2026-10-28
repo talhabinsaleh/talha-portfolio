@@ -6,6 +6,7 @@ import { FiAlertTriangle, FiArrowLeft, FiArrowUpRight, FiCheck, FiGithub, FiTren
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { projects } from "@/data/portfolio";
+import { FlipChars } from "@/components/motion/Text";
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
@@ -42,7 +43,9 @@ export default async function ProjectPage({ params }: PageProps<"/projects/[slug
             <p className="font-mono text-sm text-accent">
               {p.date} · {p.tagline}
             </p>
-            <h1 className="mt-3 font-display text-5xl font-extrabold tracking-tight uppercase sm:text-7xl">{p.title}</h1>
+            <div className="mt-3">
+              <FlipChars lines={[{ text: p.title }]} />
+            </div>
             <div className="mt-8 flex flex-wrap gap-3">
               <a
                 href={p.live}
