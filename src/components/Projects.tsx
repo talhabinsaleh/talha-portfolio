@@ -19,17 +19,19 @@ export default function Projects() {
                 href={p.live}
                 target="_blank"
                 rel="noreferrer"
-                className={`relative block aspect-[1200/630] overflow-hidden border-b border-line bg-surface-2 lg:aspect-auto lg:border-b-0 ${
+                className={`flex items-center border-b border-line bg-surface-2 p-4 sm:p-8 lg:border-b-0 ${
                   i % 2 ? "lg:order-2 lg:border-l" : "lg:border-r"
                 }`}
               >
-                <Image
-                  src={p.image}
-                  alt={`${p.title} screenshot`}
-                  fill
-                  sizes="(min-width: 1024px) 576px, 100vw"
-                  className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
-                />
+                <span className="relative block aspect-[1200/630] w-full overflow-hidden rounded-xl border border-line shadow-2xl shadow-black/40">
+                  <Image
+                    src={p.image}
+                    alt={`${p.title} screenshot`}
+                    fill
+                    sizes="(min-width: 1024px) 512px, 100vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  />
+                </span>
               </a>
 
               <div className="flex flex-col p-6 sm:p-8">
