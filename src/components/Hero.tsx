@@ -1,88 +1,164 @@
-import Link from "next/link";
-import { FiArrowUpRight, FiLayers, FiDatabase } from "react-icons/fi";
-import { profile, stats } from "@/data/portfolio";
-import BigHeading from "./BigHeading";
-import { RollingNumber, ScrambleWords } from "./motion/Text";
-import { BlurIn, CircleReveal } from "./motion/TiltCard";
+import Image from "next/image";
+import { FiDownload, FiGithub, FiLinkedin, FiMail, FiMapPin } from "react-icons/fi";
+import { FaWhatsapp } from "react-icons/fa";
+import { SiNextdotjs, SiTypescript, SiReact, SiTailwindcss } from "react-icons/si";
+import { learning, profile, skills, stats } from "@/data/portfolio";
+import ResumeViewer from "./ResumeViewer";
+import { Magnetic } from "./motion/Interactive";
+import LocalTime from "./motion/LocalTime";
+import { FlipChars, RollingNumber, ScrambleWords } from "./motion/Text";
+import Tile from "./motion/Tile";
 
-const bento = [
-  {
-    href: "/#skills",
-    icon: FiLayers,
-    text: "React, Next.js, TypeScript & Tailwind CSS",
-    className: "bg-accent text-neutral-950",
-  },
-  {
-    href: "/#projects",
-    icon: FiDatabase,
-    text: "BetterAuth, OAuth & MongoDB-backed apps",
-    className: "bg-lime text-neutral-950",
-  },
+const socials = [
+  { href: profile.github, label: "GitHub", icon: FiGithub },
+  { href: profile.linkedin, label: "LinkedIn", icon: FiLinkedin },
+  { href: `https://wa.me/${profile.whatsapp.replace(/\D/g, "")}`, label: "WhatsApp", icon: FaWhatsapp },
+  { href: `mailto:${profile.email}`, label: "Email", icon: FiMail },
 ];
+
+const tech = skills.flatMap((g) => g.items).filter((s, i, all) => all.findIndex((o) => o.name === s.name) === i);
 
 export default function Hero() {
   return (
-    <section id="top">
-      <BigHeading as="h1" top="Full-Stack" bottom="Developer" />
+    <section id="top" className="grid grid-cols-6 gap-3 lg:grid-cols-12">
+      {/* Intro */}
+      <Tile intro className="col-span-6 flex flex-col p-6 sm:p-9 lg:col-span-7 lg:row-span-2">
+        <div className="dots pointer-events-none absolute inset-0 [mask-image:linear-gradient(to_bottom,black,transparent_70%)]" />
+        <div className="relative flex flex-wrap items-center gap-2">
+          <span className="inline-flex items-center gap-2 rounded-full border border-line bg-bg/60 px-3 py-1 text-xs">
+            <span className="relative flex size-2">
+              <span className="absolute inline-flex size-full animate-ping rounded-full bg-lime opacity-70" />
+              <span className="relative inline-flex size-2 rounded-full bg-lime" />
+            </span>
+            Available for work
+          </span>
+          <span className="font-mono text-xs text-muted">{profile.name}</span>
+        </div>
 
-      <BlurIn delay={0.7}>
-        <p className="mt-6 font-display text-2xl font-semibold sm:text-3xl">
-          I build{" "}
-          <ScrambleWords
-            words={["fast web apps", "auth flows", "pixel-perfect UIs", "full-stack projects"]}
-            className="text-accent"
-          />
-        </p>
-        <p className="mt-4 max-w-xl text-lg leading-relaxed text-muted">{profile.intro}</p>
-      </BlurIn>
+        <div className="relative mt-10 lg:mt-auto">
+          <FlipChars lines={[{ text: "Full-Stack" }, { text: "Developer", className: "text-accent" }]} />
+          <p className="mt-5 font-display text-xl font-semibold sm:text-2xl">
+            I build{" "}
+            <ScrambleWords
+              words={["fast web apps", "auth flows", "pixel-perfect UIs", "full-stack projects"]}
+              className="text-muted"
+            />
+          </p>
+          <p className="mt-3 max-w-lg leading-relaxed text-muted">{profile.intro}</p>
 
-      <dl className="mt-10 flex flex-wrap gap-x-6 gap-y-6 sm:gap-x-10">
-        {stats.map((s) => (
-          <div key={s.label}>
-            <dd className="font-display text-5xl font-bold tracking-tight">
-              <RollingNumber value={s.value} />
-            </dd>
-            <dt className="mt-2 max-w-24 text-[11px] leading-snug tracking-wider text-muted uppercase sm:max-w-28 sm:text-xs">{s.label}</dt>
-          </div>
-        ))}
-      </dl>
-
-      <div className="mt-10 grid gap-4 sm:grid-cols-2">
-        {bento.map(({ href, icon: Icon, text, className }, i) => (
-          <CircleReveal key={href} delay={0.9 + i * 0.15}>
-            <Link
-              href={href}
-              className={`group relative flex min-h-48 flex-col justify-between overflow-hidden rounded-3xl p-6 transition duration-300 hover:-translate-y-1.5 hover:-rotate-1 ${className}`}
-            >
-              <span
-                className="pointer-events-none absolute inset-y-0 -left-full w-1/2 skew-x-[-20deg] bg-white/40 transition-all duration-700 group-hover:left-[150%]"
-                aria-hidden
-              />
-              <svg
-                className="pointer-events-none absolute inset-0 size-full opacity-20"
-                viewBox="0 0 300 200"
-                preserveAspectRatio="none"
-                aria-hidden
+          <div className="mt-8 flex flex-wrap items-center gap-2">
+            <Magnetic strength={0.2}>
+              <ResumeViewer className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-semibold text-accent-ink transition-colors hover:bg-lime" />
+            </Magnetic>
+            <Magnetic strength={0.2}>
+              <a
+                href={profile.resume}
+                download
+                className="inline-flex items-center gap-2 rounded-full border border-line bg-bg/60 px-5 py-3 text-sm font-semibold transition-colors hover:border-ink"
               >
-                <path
-                  d="M0 150 L40 60 L80 140 L120 40 L160 130 L200 50 L240 150 L300 70"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  className="[stroke-dasharray:900] [stroke-dashoffset:0] transition-[stroke-dashoffset] duration-1000 group-hover:[stroke-dashoffset:900]"
-                />
-              </svg>
-              <Icon size={26} className="relative" />
-              <div className="relative flex items-end justify-between gap-4">
-                <p className="font-display text-lg leading-tight font-bold uppercase">{text}</p>
-                <span className="grid size-9 shrink-0 place-items-center rounded-lg border-2 border-current transition group-hover:rotate-45">
-                  <FiArrowUpRight />
-                </span>
-              </div>
-            </Link>
-          </CircleReveal>
-        ))}
-      </div>
+                <FiDownload /> Download Resume
+              </a>
+            </Magnetic>
+            <ul className="flex items-center gap-1 sm:ml-2">
+              {socials.map(({ href, label, icon: Icon }) => (
+                <li key={label}>
+                  <Magnetic strength={0.45}>
+                    <a
+                      href={href}
+                      target={href.startsWith("http") ? "_blank" : undefined}
+                      rel="noreferrer"
+                      aria-label={label}
+                      className="grid size-11 place-items-center rounded-full text-muted transition-colors hover:bg-surface-2 hover:text-accent"
+                    >
+                      <Icon size={18} />
+                    </a>
+                  </Magnetic>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </Tile>
+
+      {/* Photo */}
+      <Tile
+        intro
+        delay={0.1}
+        className="col-span-6 aspect-[4/5] sm:aspect-[16/11] lg:col-span-5 lg:row-span-2 lg:aspect-auto lg:min-h-[560px]"
+      >
+        <Image
+          src={profile.photo}
+          alt={`Photo of ${profile.name}`}
+          fill
+          priority
+          sizes="(min-width: 1024px) 480px, 100vw"
+          className="object-cover object-[50%_20%] transition-transform duration-700 group-hover/tile:scale-105"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-6">
+          <div>
+            <p className="font-display text-2xl font-bold">{profile.name}</p>
+            <p className="text-sm text-white/70">{profile.role}</p>
+          </div>
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1.5 text-xs text-white backdrop-blur">
+            <FiMapPin /> Dhaka
+          </span>
+        </div>
+      </Tile>
+
+      {/* Stats */}
+      {stats.map((s, i) => (
+        <Tile
+          key={s.label}
+          intro
+          delay={0.2 + i * 0.06}
+          className={`col-span-2 flex flex-col justify-between p-4 sm:p-6 lg:col-span-2 ${i === 0 ? "border-accent bg-accent text-accent-ink" : ""}`}
+        >
+          <p className="font-display text-4xl font-bold tracking-tight sm:text-5xl">
+            <RollingNumber value={s.value} />
+          </p>
+          <p
+            className={`mt-6 text-[11px] leading-snug tracking-wider uppercase sm:text-xs ${i === 0 ? "text-accent-ink/70" : "text-muted"}`}
+          >
+            {s.label}
+          </p>
+        </Tile>
+      ))}
+
+      {/* Local time */}
+      <Tile intro delay={0.38} className="col-span-3 flex flex-col justify-between p-5 sm:p-6">
+        <p className="font-mono text-[11px] tracking-wider text-muted uppercase">Local time · Dhaka</p>
+        <p className="mt-6 font-display text-xl font-bold sm:text-2xl">
+          <LocalTime />
+        </p>
+        <p className="text-xs text-muted">GMT+6 · replies within a day</p>
+      </Tile>
+
+      {/* Current stack */}
+      <Tile intro delay={0.44} className="col-span-3 flex flex-col justify-between border-lime bg-lime p-5 text-accent-ink sm:p-6">
+        <p className="font-mono text-[11px] tracking-wider uppercase opacity-70">Building with</p>
+        <div className="mt-4 flex gap-2 text-2xl">
+          <SiNextdotjs />
+          <SiReact />
+          <SiTypescript />
+          <SiTailwindcss />
+        </div>
+        <p className="mt-4 text-xs font-medium">Learning: {learning.slice(0, 3).join(", ")}</p>
+      </Tile>
+
+      {/* Tech strip */}
+      <Tile intro delay={0.5} className="col-span-6 py-4 lg:col-span-12">
+        <div className="overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+          <ul className="animate-marquee flex w-max gap-3 hover:[animation-play-state:paused]">
+            {[...tech, ...tech].map(({ name, icon: Icon, color }, i) => (
+              <li key={i} className="flex items-center gap-2 rounded-full border border-line bg-bg/50 px-4 py-2 whitespace-nowrap">
+                <Icon style={{ color }} size={16} />
+                <span className="text-sm text-muted">{name}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Tile>
     </section>
   );
 }
