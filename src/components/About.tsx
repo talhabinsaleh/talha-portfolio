@@ -16,7 +16,7 @@ export default function About() {
           <p className="font-mono text-xs tracking-widest text-accent uppercase">My programming journey</p>
           <div className="mt-5 space-y-4 text-lg leading-relaxed text-ink/85">
             {about.journey.map((p) => (
-              <p key={p.slice(0, 24)} className="scroll-lit">
+              <p key={p.slice(0, 24)}>
                 {p}
               </p>
             ))}
@@ -27,7 +27,7 @@ export default function About() {
           <p className="font-mono text-xs tracking-widest text-accent uppercase">Work I enjoy</p>
           <div className="mt-5 space-y-4 text-lg leading-relaxed text-ink/85">
             {about.work.map((p) => (
-              <p key={p.slice(0, 24)} className="scroll-lit">
+              <p key={p.slice(0, 24)}>
                 {p}
               </p>
             ))}

@@ -116,32 +116,6 @@ body {
   }
 }
 
-/* Paragraphs that light up top-to-bottom as they scroll through the screen (CSS scroll timeline, no JS). */
-@supports (animation-timeline: view()) {
-  .scroll-lit {
-    color: transparent;
-    background: linear-gradient(180deg, var(--color-ink) 50%, #3a3a3a 50%) 0 100% / 100% 200% no-repeat;
-    -webkit-background-clip: text;
-    background-clip: text;
-    animation: lit linear both;
-    animation-timeline: view();
-    animation-range: entry 10% cover 55%;
-  }
-
-  @keyframes lit {
-    to {
-      background-position: 0 0;
-    }
-  }
-}
-
-@media (pointer: fine) {
-  .has-custom-cursor,
-  .has-custom-cursor * {
-    cursor: none !important;
-  }
-}
-
 /* Hero entrance animations are pure CSS so they start with the first paint, before any JavaScript.
    Each element's resting style is its final state; the keyframes only describe where it comes from. */
 @keyframes tile-in {
@@ -185,13 +159,6 @@ body {
   .tile-in,
   .flip-char,
   .roll,
-  .scroll-lit {
-    animation: none;
-  }
-  .scroll-lit {
-    color: inherit;
-    background: none;
-  }
   .loader {
     display: none;
   }

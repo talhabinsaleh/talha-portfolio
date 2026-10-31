@@ -4,7 +4,6 @@ import { FaWhatsapp } from "react-icons/fa";
 import { SiNextdotjs, SiTypescript, SiReact, SiTailwindcss } from "react-icons/si";
 import { learning, profile, skills, stats } from "@/data/portfolio";
 import ResumeViewer from "./ResumeViewer";
-import { Magnetic } from "./motion/Interactive";
 import LocalTime from "./motion/LocalTime";
 import { FlipChars, RollingNumber, ScrambleWords } from "./motion/Text";
 import Tile from "./motion/Tile";
@@ -47,10 +46,10 @@ export default function Hero() {
           <p className="mt-3 max-w-lg leading-relaxed text-muted">{profile.intro}</p>
 
           <div className="mt-8 flex flex-wrap items-center gap-2">
-            <Magnetic strength={0.2}>
+            <div>
               <ResumeViewer className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-semibold text-accent-ink transition-colors hover:bg-lime" />
-            </Magnetic>
-            <Magnetic strength={0.2}>
+            </div>
+            <div>
               <a
                 href={profile.resume}
                 download
@@ -58,11 +57,11 @@ export default function Hero() {
               >
                 <FiDownload /> Download Resume
               </a>
-            </Magnetic>
+            </div>
             <ul className="flex items-center gap-1 sm:ml-2">
               {socials.map(({ href, label, icon: Icon }) => (
                 <li key={label}>
-                  <Magnetic strength={0.45}>
+                  <div>
                     <a
                       href={href}
                       target={href.startsWith("http") ? "_blank" : undefined}
@@ -72,7 +71,7 @@ export default function Hero() {
                     >
                       <Icon size={18} />
                     </a>
-                  </Magnetic>
+                  </div>
                 </li>
               ))}
             </ul>

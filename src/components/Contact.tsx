@@ -2,7 +2,6 @@ import { FiArrowUpRight, FiGithub, FiLinkedin, FiPhone } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
 import { profile } from "@/data/portfolio";
 import BigHeading from "./BigHeading";
-import { Magnetic } from "./motion/Interactive";
 import Tile from "./motion/Tile";
 
 const digits = (n: string) => n.replace(/\D/g, "");
@@ -27,7 +26,7 @@ export default function Contact() {
               Open to junior full-stack & frontend roles, internships and freelance work.
             </p>
           </div>
-          <Magnetic strength={0.12} className="mt-10">
+          <div className="mt-10">
             <a
               href={`mailto:${profile.email}`}
               className="group/mail flex items-center justify-between gap-4 rounded-2xl bg-accent-ink p-5 text-ink transition-colors hover:bg-black"
@@ -40,7 +39,7 @@ export default function Contact() {
                 <FiArrowUpRight size={20} />
               </span>
             </a>
-          </Magnetic>
+          </div>
         </Tile>
 
         {channels.map(({ label, value, href, icon: Icon }, i) => (

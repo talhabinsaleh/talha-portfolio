@@ -3,7 +3,6 @@ import { Geist, Geist_Mono, Poppins } from "next/font/google";
 import "./globals.css";
 import Loader from "@/components/Loader";
 import { MotionProvider, ScrollProgress } from "@/components/motion/Effects";
-import { Cursor } from "@/components/motion/Interactive";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -58,7 +57,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Loader />
         <MotionProvider>
           <ScrollProgress />
-          <Cursor />
           {children}
         </MotionProvider>
       </body>

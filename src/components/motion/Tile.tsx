@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import type { PointerEvent, ReactNode } from "react";
+import type { ReactNode } from "react";
 
 type Props = {
   children: ReactNode;
@@ -15,13 +15,7 @@ const ease = [0.16, 1, 0.3, 1] as const;
 const closed = { clipPath: "inset(10% 10% 10% 10% round 28px)", opacity: 0 };
 const open = { clipPath: "inset(0% 0% 0% 0% round 28px)", opacity: 1 };
 
-function trackPointer(e: PointerEvent<HTMLDivElement>) {
-  const r = e.currentTarget.getBoundingClientRect();
-  e.currentTarget.style.setProperty("--x", `${e.clientX - r.left}px`);
-  e.currentTarget.style.setProperty("--y", `${e.clientY - r.top}px`);
-}
-
-// Bento tile: expands open from its centre, and a soft glow follows the pointer on hover.
+// Bento tile: expands open from its centre, with a soft glow on hover.
 // Hero tiles (`intro`) use the CSS .tile-in animation so they show on first paint; the rest open
 // just before they scroll into view, so they are already there when you reach them.
 export default function Tile({ children, className = "", delay = 0, intro = false }: Props) {
@@ -32,13 +26,13 @@ export default function Tile({ children, className = "", delay = 0, intro = fals
   const glow = (
     <span
       aria-hidden
-      className="pointer-events-none absolute inset-0 z-10 opacity-0 transition-opacity duration-300 group-hover/tile:opacity-100 bg-[radial-gradient(420px_circle_at_var(--x,50%)_var(--y,50%),rgb(255_106_43/0.09),transparent_60%)]"
+      className="pointer-events-none absolute inset-0 z-10 opacity-0 transition-opacity duration-300 group-hover/tile:opacity-100 bg-[radial-gradient(420px_circle_at_50%_50%,rgb(255_106_43/0.09),transparent_60%)]"
     />
   );
 
   if (intro) {
     return (
-      <div className={`tile-in ${classes}`} style={{ animationDelay: `calc(var(--intro) + ${delay}s)` }} onPointerMove={trackPointer}>
+      <div className={`tile-in ${classes}`} style={{ animationDelay: `calc(var(--intro) + ${delay}s)` }}>
         {glow}
         {children}
       </div>
@@ -52,7 +46,7 @@ export default function Tile({ children, className = "", delay = 0, intro = fals
       whileInView={open}
       viewport={{ once: true, margin: "0px 0px 220px 0px" }}
       transition={{ duration: 0.5, delay: delay / 2, ease }}
-      onPointerMove={trackPointer}
+     
     >
       {glow}
       {children}
